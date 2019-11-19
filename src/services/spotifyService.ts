@@ -1,14 +1,18 @@
-class SpotifyService {
-  constructor() {}
+import React, { Component } from "react";
 
-  webserverBaseURL = "http://localhost:3001";
+const webserverBaseURL = "http://localhost:3001";
+
+export default class SpotifyService extends Component {
+  constructor() {
+    super();
+  }
 
   login() {
-    fetch(this.webserverBaseURL + "/login");
+    fetch(webserverBaseURL + "/login");
   }
 
   getPlaylist() {
-    return fetch(this.webserverBaseURL + "/playlist")
+    return fetch(webserverBaseURL + "/playlist")
       .then(response => response.json())
       .then(json => json);
   }
