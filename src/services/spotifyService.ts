@@ -16,7 +16,7 @@ export default class SpotifyService extends Component {
   }
 
   getPlaylist() {
-    return fetch(webserverBaseURL + "/playlist")
+    return fetch(webserverBaseURL + "/playlists")
       .then(response => response.json())
       .then(json => console.log(json));
   }

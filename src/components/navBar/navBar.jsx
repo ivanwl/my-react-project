@@ -11,26 +11,29 @@ export default class NavBar extends Component {
 
   render() {
     return (
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
+              <a className="nav-link" href="#">
                 Home
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
+            <li className="nav-item">
+              <a className="nav-link" href="#">
                 Weather
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
+            <li className="nav-item">
+              <a className="nav-link" href="#">
                 Spotify
               </a>
             </li>
           </ul>
-          <button onClick={spotifyService.login} class="btn btn-primary mr-3">
+          <button
+            onClick={spotifyService.login}
+            className="btn btn-primary mr-3"
+          >
             Login
           </button>
         </div>
