@@ -5,6 +5,10 @@ import SpotifyService from "../../services/spotifyService.ts";
 let spotifyService = new SpotifyService();
 
 export default class NavBar extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
