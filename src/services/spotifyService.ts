@@ -1,10 +1,18 @@
 import React, { Component } from "react";
+import PlaylistModel from "../models/playlistModel";
 
 const webserverBaseURL = "http://localhost:3001/spotify";
+const loginEP = "/login";
+const playlistsEP = "/playlists";
+const playlistEP = "/playlist/";
 
 export default class SpotifyService extends Component {
   constructor(props: any) {
     super(props);
+  }
+
+  private getJson(url: string) {
+    return fetch(url).then(response => response.json());
   }
 
   login() {
@@ -16,8 +24,12 @@ export default class SpotifyService extends Component {
   }
 
   getPlaylists() {
-    return fetch(webserverBaseURL + "/playlists")
-      .then(response => response.json())
-      .then(json => console.log(json));
+    return this.getJson(webserverBaseURL + playlistsEP).then(json =>
+      json.items.map((playlist: any) => new PlaylistModel(playlist))
+    );
+  }
+
+  getPlaylist(id: string) {
+    return this.getJson(webserverBaseURL + playlistEP + id);
   }
 }

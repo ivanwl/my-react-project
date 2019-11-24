@@ -14,8 +14,8 @@ export default class Playlist {
     let playlist = object;
     this.name = playlist.name;
     this.description = playlist.description;
-    this.url = playlist.href;
-    playlist.array.forEach((image: any) => {
+    this.url = playlist.external_urls.spotify;
+    playlist.images.forEach((image: any) => {
       this.images.push(image.url);
     });
     this.followers = playlist.followers;
