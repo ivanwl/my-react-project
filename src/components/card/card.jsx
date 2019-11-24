@@ -4,7 +4,6 @@ import placeholder_image from "../../assets/placeholder_image.jpg";
 export default class Card extends Component {
   constructor(props) {
     super(props);
-    let playlist = props.playlist;
     this.state = {};
   }
 

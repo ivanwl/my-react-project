@@ -20,9 +20,9 @@ export default class TrackModel {
     this.duration_ms = track.duration_ms;
   }
 
-  parseDuration() {
+  parseDuration(): string {
     let durationInSeconds = parseInt((this.duration_ms / 1000).toFixed());
-    if (durationInSeconds < 60) return durationInSeconds;
+    if (durationInSeconds < 60) return durationInSeconds.toString();
     let minutes = parseInt((durationInSeconds / 60).toFixed());
     let hour = "";
     if (minutes >= 60) {

@@ -4,6 +4,7 @@ import SpotifyService from "../../services/spotifyService";
 import PlaylistModel from "../../models/playlistModel";
 import TrackModel from "../../models/trackModel";
 import "./style.css";
+import Carousel from "../carousel/carousel";
 
 let spotifyService = new SpotifyService();
 
@@ -12,10 +13,14 @@ export default class Playlist extends Component {
     super(props);
     this.state = {
       showCard: false,
+      showCarousel: false,
       playlist: null,
+      trackIndex: null,
       list: [],
       id: []
     };
+
+    this.carouselNextHandler = this.carouselNextHandler.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +53,26 @@ export default class Playlist extends Component {
     });
   }
 
+  handleTrack(id) {
+    this.setState({
+      showCard: false,
+      showCarousel: true,
+      trackIndex: this.state.playlist.tracks.reduce(
+        (result, current, index) => {
+          if (current.id === id) result.push(index);
+          return result;
+        },
+        []
+      )[0]
+    });
+  }
+
+  carouselNextHandler() {
+    this.setState({
+      trackIndex: ++this.state.trackIndex
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -56,21 +81,34 @@ export default class Playlist extends Component {
             <React.Fragment>
               <button
                 type="button"
-                onClick={() => this.handleBack()}
-                className="btn btn-primary col-sm-5"
+                onClick={this.handleBack}
+                className="btn btn-primary col-sm-3"
               >
                 {"< Back"}
               </button>
               <Card playlist={this.state.playlist} />
             </React.Fragment>
           )}
+
+          {this.state.showCarousel && (
+            <Carousel
+              tracks={this.state.playlist.tracks}
+              active={this.state.trackIndex}
+              carouselNextHandler={this.carouselNextHandler}
+            />
+          )}
+
           <ul className="list-group">
             {this.state.list.length ? (
               this.state.list.map((entry, index) => (
                 <li className="list-group-item" key={this.state.id[index]}>
                   <a
                     href="#"
-                    onClick={() => this.handlePlaylist(this.state.id[index])}
+                    onClick={() =>
+                      this.state.showCard
+                        ? this.handleTrack(this.state.id[index])
+                        : this.handlePlaylist(this.state.id[index])
+                    }
                   >
                     {entry}
                   </a>
