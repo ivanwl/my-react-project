@@ -4,13 +4,15 @@ import placeholder_image from "../../assets/placeholder_image.jpg";
 export default class Card extends Component {
   constructor(props) {
     super(props);
+    let playlist = props.playlist;
     this.state = {
-      name: null,
-      author: null,
-      description: null,
-      followers: null
+      name: playlist.name,
+      author: playlist.owner,
+      description: playlist.description,
+      followers: playlist.followers
     };
   }
+
   render() {
     return (
       <div className="row no-gutters">

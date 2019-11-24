@@ -12,6 +12,8 @@ export default class Playlist extends Component {
     super(props);
     this.state = {
       showCard: false,
+      playlist: null,
+      track: [],
       list: [],
       id: []
     };
@@ -30,8 +32,9 @@ export default class Playlist extends Component {
     spotifyService.getPlaylist(id).then(playlist => {
       this.setState({
         showCard: true,
-        list: playlist.map(playlist => playlist.name),
-        id: playlist.map(playlist => playlist.id)
+        list: playlist.tracks.map(track => track.name),
+        id: playlist.tracks.map(track => track.id),
+        playlist: playlist
       });
     });
   }
@@ -40,7 +43,7 @@ export default class Playlist extends Component {
     return (
       <React.Fragment>
         <div className="card mb-3 col-sm-5 p-0" max-width="540px">
-          {this.state.showCard && <Card />}
+          {this.state.showCard && <Card playlist={this.state.playlist} />}
           <ul className="list-group">
             {this.state.list.length ? (
               this.state.list.map((entry, index) => (

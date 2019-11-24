@@ -1,19 +1,17 @@
 import React, { Component } from "react";
 
-export default class Track {
+export default class TrackModel {
   id: string;
-  images: string[] = [];
+  images: string[];
   name: string;
   artist: string;
   url: string;
   duration_ms: number;
 
   constructor(object: any) {
-    let track = object.track.album;
+    let track = object;
     this.id = track.id;
-    track.images.forEach((image: any) => {
-      this.images.push(image.url);
-    });
+    this.images = track.album.images.map((image: any) => image.url);
     this.name = track.name;
     track.artists[0]
       ? (this.artist = track.artists[0].name)

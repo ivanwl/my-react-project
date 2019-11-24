@@ -31,8 +31,8 @@ export default class SpotifyService extends Component {
   }
 
   getPlaylist(id: string) {
-    return this.getJson(webserverBaseURL + playlistEP + id).then(json =>
-      json.tracks.items.map((track: any) => new TrackModel(track))
+    return this.getJson(webserverBaseURL + playlistEP + id).then(
+      json => new PlaylistModel(json)
     );
   }
 }
