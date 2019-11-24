@@ -5,12 +5,8 @@ export default class Card extends Component {
   constructor(props) {
     super(props);
     let playlist = props.playlist;
-    this.state = {
-      name: playlist.name,
-      author: playlist.owner,
-      description: playlist.description,
-      followers: playlist.followers
-    };
+    console.log(props);
+    this.state = {};
   }
 
   render() {
@@ -18,7 +14,15 @@ export default class Card extends Component {
       <div className="row no-gutters">
         <div className="col-sm-4">
           <img
-            src={placeholder_image}
+            src={
+              this.props.playlist.images
+                ? this.props.playlist.images[
+                    Math.floor(
+                      Math.random() * this.props.playlist.images.length
+                    )
+                  ]
+                : placeholder_image
+            }
             width="150"
             height="150"
             className="card-img"
@@ -27,16 +31,21 @@ export default class Card extends Component {
         <div className="col-sm-8">
           <div className="card-body">
             <h5 className="card-title">
-              {this.state.name ? this.state.name : ""}
+              {this.props.playlist.name ? this.props.playlist.name : ""}
             </h5>
             <p className="card-text">
-              {this.state.description ? this.state.description : ""}
+              {this.props.playlist.description
+                ? this.props.playlist.description
+                : ""}
               <br></br>
-              {this.state.author ? this.state.author : ""}
+              {this.props.playlist.author ? this.props.playlist.author : ""}
             </p>
             <p className="card-text">
               <small className="text-muted">
-                Followers: {this.state.follower ? this.state.follower : ""}
+                Followers: {this.props.playlist.followers}
+                {this.props.playlist.follower
+                  ? this.props.playlist.follower
+                  : ""}
               </small>
             </p>
           </div>

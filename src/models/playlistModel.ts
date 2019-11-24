@@ -14,7 +14,6 @@ export default class Playlist {
 
   constructor(object: any) {
     let playlist = object;
-    console.log(playlist);
     this.name = playlist.name;
     this.description = playlist.description;
     this.url = playlist.external_urls.spotify;
