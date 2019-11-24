@@ -5,7 +5,6 @@ export default class Card extends Component {
   constructor(props) {
     super(props);
     let playlist = props.playlist;
-    console.log(props);
     this.state = {};
   }
 
@@ -25,7 +24,7 @@ export default class Card extends Component {
             }
             width="150"
             height="150"
-            className="card-img"
+            className="card-img pt-5"
           />
         </div>
         <div className="col-sm-8">
