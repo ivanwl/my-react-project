@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PlaylistModel from "../models/playlistModel";
+import TrackModel from "../models/trackModel";
 
 const webserverBaseURL = "http://localhost:3001/spotify";
 const loginEP = "/login";
@@ -30,6 +31,8 @@ export default class SpotifyService extends Component {
   }
 
   getPlaylist(id: string) {
-    return this.getJson(webserverBaseURL + playlistEP + id);
+    return this.getJson(webserverBaseURL + playlistEP + id).then(json =>
+      json.tracks.items.map((track: any) => new TrackModel(track))
+    );
   }
 }

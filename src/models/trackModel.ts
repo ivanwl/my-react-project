@@ -15,7 +15,7 @@ export default class Track {
       this.images.push(image.url);
     });
     this.name = track.name;
-    track.artist[0]
+    track.artists[0]
       ? (this.artist = track.artists[0].name)
       : (this.artist = "");
     this.url = track.external_urls.spotify;
