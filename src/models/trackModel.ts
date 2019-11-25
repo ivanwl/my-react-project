@@ -7,9 +7,10 @@ export default class TrackModel {
   artist: string;
   url: string;
   duration_ms: number;
+  color: string;
 
   constructor(object: any) {
-    let track = object;
+    let track = object.track;
     this.id = track.id;
     this.images = track.album.images.map((image: any) => image.url);
     this.name = track.name;
@@ -18,6 +19,7 @@ export default class TrackModel {
       : (this.artist = "");
     this.url = track.external_urls.spotify;
     this.duration_ms = track.duration_ms;
+    this.color = object.primary_color;
   }
 
   parseDuration(): string {

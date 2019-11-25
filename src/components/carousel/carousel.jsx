@@ -13,9 +13,10 @@ export default class Carousel extends Component {
   }
 
   handlePlayToggle() {
-    this.setState({
-      play: !this.state.play
-    });
+    if (this.state.play)
+      this.setState({
+        play: !this.state.play
+      });
   }
 
   handleMouseEnter() {
@@ -66,6 +67,21 @@ export default class Carousel extends Component {
               />
               {this.state.showControls && (
                 <div className="carousel-caption d-none d-md-block">
+                  <b style={{ color: track.color, fontSize: "18px" }}>
+                    {track.name}
+                  </b>
+                  <br />
+                  <div className="progress" style={{ height: "2px" }}>
+                    <div
+                      className="progress-bar"
+                      role="progressbar"
+                      style={{ width: "25%" }}
+                      aria-valuenow={"25"}
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
+                  <br />
                   <a
                     href="#"
                     onClick={this.handlePlayToggle}

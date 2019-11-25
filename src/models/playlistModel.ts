@@ -24,7 +24,7 @@ export default class Playlist {
     this.color = playlist.primary_color;
     if (playlist.tracks.items)
       this.tracks = playlist.tracks.items.map(
-        (track: any) => new TrackModel(track.track)
+        (track: any) => new TrackModel(track)
       );
   }
 }

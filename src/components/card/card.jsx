@@ -35,7 +35,7 @@ export default class Card extends Component {
               {this.props.playlist.description
                 ? this.props.playlist.description
                 : ""}
-              <br></br>
+              <br />
               {this.props.playlist.author ? this.props.playlist.author : ""}
             </p>
             <p className="card-text">
