@@ -2,8 +2,12 @@
   top: 0;
   left: 0;
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   padding: 8px;
+}
+
+.carousel-caption {
+  mix-blend-mode: difference;
 }
 
 .carousel-caption a {

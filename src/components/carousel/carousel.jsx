@@ -13,10 +13,9 @@ export default class Carousel extends Component {
   }
 
   handlePlayToggle() {
-    if (this.state.play)
-      this.setState({
-        play: !this.state.play
-      });
+    this.setState({
+      play: !this.state.play
+    });
   }
 
   handleMouseEnter() {
@@ -46,7 +45,7 @@ export default class Carousel extends Component {
             <a
               id="backBtn"
               href="#"
-              onClick={this.handlePlayToggle}
+              onClick={this.handlePlayToggle1}
               className="badge badge-pill badge-light"
             >
               {"<Back"}
@@ -94,7 +93,7 @@ export default class Carousel extends Component {
             </div>
           ))}
         </div>
-        {this.state.showControls && this.props.active && (
+        {this.state.showControls && this.props.active !== 0 && (
           <a
             onClick={this.props.handleCarouselPrev}
             className="carousel-control-prev"

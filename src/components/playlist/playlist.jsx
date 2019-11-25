@@ -89,6 +89,7 @@ export default class Playlist extends Component {
           {this.state.showCard && (
             <React.Fragment>
               <button
+                id="backBtn"
                 type="button"
                 onClick={this.handleBack}
                 className="btn btn-primary col-sm-3"
@@ -111,16 +112,27 @@ export default class Playlist extends Component {
           <ul className="list-group">
             {this.state.list.length ? (
               this.state.list.map((entry, index) => (
-                <li className="list-group-item" key={this.state.id[index]}>
+                <li
+                  className="list-group-item"
+                  style={{
+                    backgroundColor:
+                      this.state.showCarousel && this.state.trackIndex === index
+                        ? this.state.playlist.tracks[index].color
+                          ? this.state.playlist.tracks[index].color
+                          : "#007bff"
+                        : ""
+                  }}
+                  key={this.state.id[index]}
+                >
                   <a
                     href="#"
                     onClick={() =>
-                      this.state.showCard
+                      this.state.showCard || this.state.showCarousel
                         ? this.handleTrack(this.state.id[index])
                         : this.handlePlaylist(this.state.id[index])
                     }
                   >
-                    {entry}
+                    <b>{entry}</b>
                   </a>
                 </li>
               ))
