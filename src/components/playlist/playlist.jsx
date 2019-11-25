@@ -20,7 +20,8 @@ export default class Playlist extends Component {
       id: []
     };
 
-    this.carouselNextHandler = this.carouselNextHandler.bind(this);
+    this.handleCarouselPrev = this.handleCarouselPrev.bind(this);
+    this.handleCarouselNext = this.handleCarouselNext.bind(this);
   }
 
   componentDidMount() {
@@ -67,7 +68,15 @@ export default class Playlist extends Component {
     });
   }
 
-  carouselNextHandler() {
+  handleCarouselPrev() {
+    if (this.state.trackIndex === 0) return;
+    this.setState({
+      trackIndex: --this.state.trackIndex
+    });
+  }
+
+  handleCarouselNext() {
+    if (this.state.trackIndex === this.state.playlist.tracks.length - 1) return;
     this.setState({
       trackIndex: ++this.state.trackIndex
     });
@@ -94,7 +103,8 @@ export default class Playlist extends Component {
             <Carousel
               tracks={this.state.playlist.tracks}
               active={this.state.trackIndex}
-              carouselNextHandler={this.carouselNextHandler}
+              handleCarouselPrev={this.handleCarouselPrev}
+              handleCarouselNext={this.handleCarouselNext}
             />
           )}
 

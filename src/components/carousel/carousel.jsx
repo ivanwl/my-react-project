@@ -1,9 +1,18 @@
 import React, { Component } from "react";
+import placeholder_image from "../../assets/placeholder_image.jpg";
 
 export default class Carousel extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { play: true };
+
+    this.handlePlayToggle = this.handlePlayToggle.bind(this);
+  }
+
+  handlePlayToggle() {
+    this.setState({
+      play: !this.state.play
+    });
   }
 
   render() {
@@ -24,11 +33,15 @@ export default class Carousel extends Component {
               }
               key={track.id}
             >
-              <img className="d-block w-100" src={track.images[0]} />
+              <img
+                className="d-block w-100"
+                src={track.images ? track.images[0] : placeholder_image}
+              />
             </div>
           ))}
         </div>
         <a
+          onClick={this.props.handleCarouselPrev}
           className="carousel-control-prev"
           href="#carouselControls"
           role="button"
@@ -41,7 +54,7 @@ export default class Carousel extends Component {
           <span className="sr-only">Previous</span>
         </a>
         <a
-          onClick={this.props.carouselNextHandler}
+          onClick={this.props.handleCarouselNext}
           className="carousel-control-next"
           href="#carouselControls"
           role="button"
