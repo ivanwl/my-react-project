@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import placeholder_image from "../../assets/placeholder_image.jpg";
+import "./style.css";
 
 export default class Carousel extends Component {
   constructor(props) {
     super(props);
-    this.state = { play: true };
+    this.state = { showControls: false, play: true };
 
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
     this.handlePlayToggle = this.handlePlayToggle.bind(this);
   }
 
@@ -15,15 +18,39 @@ export default class Carousel extends Component {
     });
   }
 
+  handleMouseEnter() {
+    this.setState({
+      showControls: true
+    });
+  }
+
+  handleMouseLeave() {
+    this.setState({
+      showControls: false
+    });
+  }
+
   render() {
     let carouselStyle = "carousel-item";
     return (
       <div
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
         id="carouselControls"
         className="carousel slide"
         data-ride="carousel"
       >
         <div className="carousel-inner">
+          {this.state.showControls && (
+            <a
+              id="backBtn"
+              href="#"
+              onClick={this.handlePlayToggle}
+              className="badge badge-pill badge-light"
+            >
+              {"<Back"}
+            </a>
+          )}
           {this.props.tracks.map((track, index) => (
             <div
               className={
@@ -37,35 +64,51 @@ export default class Carousel extends Component {
                 className="d-block w-100"
                 src={track.images ? track.images[0] : placeholder_image}
               />
+              {this.state.showControls && (
+                <div className="carousel-caption d-none d-md-block">
+                  <a
+                    href="#"
+                    onClick={this.handlePlayToggle}
+                    className="badge badge-pill badge-light"
+                  >
+                    {this.state.play ? "||" : "<|"}
+                  </a>
+                </div>
+              )}
             </div>
           ))}
         </div>
-        <a
-          onClick={this.props.handleCarouselPrev}
-          className="carousel-control-prev"
-          href="#carouselControls"
-          role="button"
-          data-slide="prev"
-        >
-          <span
-            className="carousel-control-prev-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="sr-only">Previous</span>
-        </a>
-        <a
-          onClick={this.props.handleCarouselNext}
-          className="carousel-control-next"
-          href="#carouselControls"
-          role="button"
-          data-slide="next"
-        >
-          <span
-            className="carousel-control-next-icon"
-            aria-hidden="true"
-          ></span>
-          <span className="sr-only">Next</span>
-        </a>
+        {this.state.showControls && this.props.active && (
+          <a
+            onClick={this.props.handleCarouselPrev}
+            className="carousel-control-prev"
+            href="#carouselControls"
+            role="button"
+            data-slide="prev"
+          >
+            <span
+              className="carousel-control-prev-icon"
+              aria-hidden="true"
+            ></span>
+            <span className="sr-only">Previous</span>
+          </a>
+        )}
+        {this.state.showControls &&
+          this.props.active < this.props.tracks.length - 1 && (
+            <a
+              onClick={this.props.handleCarouselNext}
+              className="carousel-control-next"
+              href="#carouselControls"
+              role="button"
+              data-slide="next"
+            >
+              <span
+                className="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span className="sr-only">Next</span>
+            </a>
+          )}
       </div>
     );
   }

@@ -1,0 +1,12 @@
+#backBtn {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 2;
+  padding: 8px;
+}
+
+.carousel-caption {
+  padding: 8px;
+  font-size: 35px;
+}
