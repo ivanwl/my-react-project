@@ -29,9 +29,9 @@ export default class Card extends Component {
         </div>
         <div className="col-sm-8">
           <div className="card-body">
-            <h5 className="card-title">
+            <h6 className="card-title">
               {this.props.playlist.name ? this.props.playlist.name : ""}
-            </h5>
+            </h6>
             <p className="card-text">
               {this.props.playlist.description
                 ? this.props.playlist.description

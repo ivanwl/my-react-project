@@ -11,10 +11,15 @@
   transition-delay: 20ms;
 }
 
-a {
+.list-group-item a {
   mix-blend-mode: difference;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+#listButton {
+  text-align: right;
+  padding-right: 1em;
 }

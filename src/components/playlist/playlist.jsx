@@ -14,6 +14,7 @@ export default class Playlist extends Component {
     this.state = {
       showCard: false,
       showCarousel: false,
+      showList: true,
       playlist: null,
       trackIndex: null,
       list: [],
@@ -21,6 +22,7 @@ export default class Playlist extends Component {
     };
 
     this.handleBack = this.handleBack.bind(this);
+    this.expandCollapse = this.expandCollapse.bind(this);
     this.handleCarouselPrev = this.handleCarouselPrev.bind(this);
     this.handleCarouselNext = this.handleCarouselNext.bind(this);
     this.handleCarouselBack = this.handleCarouselBack.bind(this);
@@ -91,6 +93,12 @@ export default class Playlist extends Component {
     });
   }
 
+  expandCollapse() {
+    this.setState({
+      showList: !this.state.showList
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -101,7 +109,7 @@ export default class Playlist extends Component {
                 id="backBtn"
                 type="button"
                 onClick={this.handleBack}
-                className="btn btn-primary col-sm-3"
+                className="btn btn-primary col-sm-4"
               >
                 {"< Back"}
               </button>
@@ -119,37 +127,43 @@ export default class Playlist extends Component {
             />
           )}
 
-          <ul className="list-group">
-            {this.state.list.length ? (
-              this.state.list.map((entry, index) => (
-                <li
-                  className="list-group-item"
-                  style={{
-                    backgroundColor:
-                      this.state.showCarousel && this.state.trackIndex === index
-                        ? this.state.playlist.tracks[index].color
+          {this.state.showList && (
+            <ul className="list-group">
+              {this.state.list.length ? (
+                this.state.list.map((entry, index) => (
+                  <li
+                    className="list-group-item"
+                    style={{
+                      backgroundColor:
+                        this.state.showCarousel &&
+                        this.state.trackIndex === index
                           ? this.state.playlist.tracks[index].color
-                          : "#007bff"
-                        : ""
-                  }}
-                  key={this.state.id[index]}
-                >
-                  <a
-                    href="#!"
-                    onClick={() =>
-                      this.state.showCard || this.state.showCarousel
-                        ? this.handleTrack(this.state.id[index])
-                        : this.handlePlaylist(this.state.id[index])
-                    }
+                            ? this.state.playlist.tracks[index].color
+                            : "#007bff"
+                          : ""
+                    }}
+                    key={this.state.id[index]}
                   >
-                    <b>{entry}</b>
-                  </a>
-                </li>
-              ))
-            ) : (
-              <li className="list-group-item">No Playlist</li>
-            )}
-          </ul>
+                    <a
+                      href="#!"
+                      onClick={() =>
+                        this.state.showCard || this.state.showCarousel
+                          ? this.handleTrack(this.state.id[index])
+                          : this.handlePlaylist(this.state.id[index])
+                      }
+                    >
+                      <b>{entry}</b>
+                    </a>
+                  </li>
+                ))
+              ) : (
+                <li className="list-group-item">No Playlist</li>
+              )}
+            </ul>
+          )}
+          <a onClick={this.expandCollapse} href="#!" id="listButton">
+            {this.state.showList ? "∧" : "∨"}
+          </a>
         </div>
       </React.Fragment>
     );
