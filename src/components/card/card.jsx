@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import placeholder_image from "../../assets/placeholder_image.jpg";
+import "./style.css";
 
 export default class Card extends Component {
   constructor(props) {

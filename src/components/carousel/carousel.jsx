@@ -44,8 +44,8 @@ export default class Carousel extends Component {
           {this.state.showControls && (
             <a
               id="backBtn"
-              href="#"
-              onClick={this.handlePlayToggle1}
+              href="#!"
+              onClick={this.props.handleCarouselBack}
               className="badge badge-pill badge-light"
             >
               {"<Back"}
@@ -65,7 +65,7 @@ export default class Carousel extends Component {
                 src={track.images ? track.images[0] : placeholder_image}
               />
               {this.state.showControls && (
-                <div className="carousel-caption d-none d-md-block">
+                <div className="carousel-caption d-xs-block">
                   <b style={{ color: track.color, fontSize: "18px" }}>
                     {track.name}
                   </b>
@@ -82,7 +82,7 @@ export default class Carousel extends Component {
                   </div>
                   <br />
                   <a
-                    href="#"
+                    href="#!"
                     onClick={this.handlePlayToggle}
                     className="badge badge-pill badge-light"
                   >

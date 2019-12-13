@@ -20,8 +20,10 @@ export default class Playlist extends Component {
       id: []
     };
 
+    this.handleBack = this.handleBack.bind(this);
     this.handleCarouselPrev = this.handleCarouselPrev.bind(this);
     this.handleCarouselNext = this.handleCarouselNext.bind(this);
+    this.handleCarouselBack = this.handleCarouselBack.bind(this);
   }
 
   componentDidMount() {
@@ -82,10 +84,17 @@ export default class Playlist extends Component {
     });
   }
 
+  handleCarouselBack() {
+    this.setState({
+      showCard: true,
+      showCarousel: false
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
-        <div className="card mb-3 col-sm-5 p-0" max-width="540px">
+        <div className="card mb-3 col-sm-4 col-md-3 p-0" max-width="540px">
           {this.state.showCard && (
             <React.Fragment>
               <button
@@ -106,6 +115,7 @@ export default class Playlist extends Component {
               active={this.state.trackIndex}
               handleCarouselPrev={this.handleCarouselPrev}
               handleCarouselNext={this.handleCarouselNext}
+              handleCarouselBack={this.handleCarouselBack}
             />
           )}
 
@@ -125,7 +135,7 @@ export default class Playlist extends Component {
                   key={this.state.id[index]}
                 >
                   <a
-                    href="#"
+                    href="#!"
                     onClick={() =>
                       this.state.showCard || this.state.showCarousel
                         ? this.handleTrack(this.state.id[index])
