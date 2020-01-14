@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import placeholder_image from "../../assets/placeholder_image.jpg";
 import "./style.css";
+import SpotifyService from "../../services/spotifyService";
+
+let spotifyService = new SpotifyService();
 
 export default class Carousel extends Component {
   constructor(props) {
@@ -16,6 +19,9 @@ export default class Carousel extends Component {
     this.setState({
       play: !this.state.play
     });
+    this.state.play
+      ? spotifyService.startPlaylist("", "")
+      : spotifyService.pausePlayer();
   }
 
   handleMouseEnter() {
@@ -74,8 +80,8 @@ export default class Carousel extends Component {
                     <div
                       className="progress-bar"
                       role="progressbar"
-                      style={{ width: "25%" }}
-                      aria-valuenow={"25"}
+                      style={{ width: "1%" }}
+                      aria-valuenow={"1"}
                       aria-valuemin="0"
                       aria-valuemax="100"
                     ></div>

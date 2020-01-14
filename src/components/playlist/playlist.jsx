@@ -64,7 +64,13 @@ export default class Playlist extends Component {
       showCarousel: true,
       trackIndex: this.state.playlist.tracks.reduce(
         (result, current, index) => {
-          if (current.id === id) result.push(index);
+          if (current.id === id) {
+            result.push(index);
+            spotifyService.startPlaylist(
+              this.state.playlist.id,
+              this.state.trackIndex
+            );
+          }
           return result;
         },
         []
@@ -77,6 +83,7 @@ export default class Playlist extends Component {
     this.setState({
       trackIndex: --this.state.trackIndex
     });
+    spotifyService.startPlaylist(this.state.playlist.id, this.state.trackIndex);
   }
 
   handleCarouselNext() {
@@ -84,6 +91,7 @@ export default class Playlist extends Component {
     this.setState({
       trackIndex: ++this.state.trackIndex
     });
+    spotifyService.startPlaylist(this.state.playlist.id, this.state.trackIndex);
   }
 
   handleCarouselBack() {

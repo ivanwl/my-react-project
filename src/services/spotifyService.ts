@@ -6,6 +6,8 @@ const webserverBaseURL = "http://localhost:3001/spotify";
 const loginEP = "/login";
 const playlistsEP = "/playlists";
 const playlistEP = "/playlist/";
+const playEP = "/player/play/";
+const pauseEP = "/player/pause";
 
 export default class SpotifyService extends Component {
   constructor(props: any) {
@@ -34,5 +36,24 @@ export default class SpotifyService extends Component {
     return this.getJson(webserverBaseURL + playlistEP + id).then(
       json => new PlaylistModel(json)
     );
+  }
+
+  startPlaylist(playlist: string, offset: number) {
+    let body = {};
+    if (playlist)
+      body = { context_uri: `spotify:playlist:${playlist}`, offset };
+    return fetch(webserverBaseURL + playEP, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    }).then(response => response.json());
+  }
+
+  pausePlayer() {
+    return fetch(webserverBaseURL + pauseEP, {
+      method: "PUT"
+    });
   }
 }
